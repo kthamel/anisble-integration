@@ -4,7 +4,7 @@ pipeline {
         ANSIBLE_KEY=credentials('ANSIBLE_KEY')
     }
     stages {
-        stage('versions'){
+        stage('Versions'){
             steps {
                 sh '''
                     ansible --version
@@ -14,10 +14,18 @@ pipeline {
             }
         }
 
-        stage('validation') {
+        stage('Validation') {
             steps {
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --syntax-check 
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
+                '''
+            }
+        }
+
+        stage('Execution') {
+            steps {
+                sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
                 '''
             }
