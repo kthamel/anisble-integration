@@ -17,8 +17,8 @@ pipeline {
         stage('validation') {
             steps {
                 sh '''
-                    ansible-playbook -i develop --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --syntax-check 
-                    ansible-playbook -i develop --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --syntax-check 
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
                 '''
             }
         }
