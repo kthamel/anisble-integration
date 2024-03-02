@@ -1,6 +1,6 @@
 ---
 - name: Testing configurations
-  hosts: hosts
+  hosts: develop
   tasks:
     - name: Check playbook syntaxes
       ansible.builtin.command: systemctl status sshd.service
