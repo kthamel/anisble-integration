@@ -1,2 +1,2 @@
 [develop]
-m2-jenair.39.local
+m2-jenair.39.local ansible_ssh_host=172.16.127.130 ansible_ssh_port=22 ansible_user=jenkins
