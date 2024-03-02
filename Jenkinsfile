@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh '''
                     hostnamectl
-                    cat $ANSIBLE_KEY
+                    ping -c 10 m2-jenair.39.local
                 '''
             }
         }
