@@ -18,7 +18,6 @@ pipeline {
             steps {
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --syntax-check 
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
                 '''
             }
         }
@@ -26,7 +25,8 @@ pipeline {
         stage('Execution') {
             steps {
                 sh '''
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
+                    hostnamectl
+                    // ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
                 '''
             }
         }
