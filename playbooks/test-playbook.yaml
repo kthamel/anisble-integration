@@ -1,0 +1,11 @@
+---
+- name: Testing configurations
+  hosts: hosts
+  tasks:
+    - name: Check playbook syntaxes
+      ansible.builtin.command: systemctl status sshd.service
+      become: true
+      become_user: jenkins
+      register: sshd_status
+      changed_when: sshd_status != 0
+      ignore_errors: true
