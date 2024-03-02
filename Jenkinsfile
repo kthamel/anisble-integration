@@ -1,8 +1,5 @@
 pipeline {
     agent {label 'ansible'}
-    options {
-        ansiColor('xterm')
-    }
     environment {
         ANSIBLE_KEY=credentials('ANSIBLE_KEY')
     }
