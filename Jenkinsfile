@@ -14,12 +14,13 @@ pipeline {
             }
         }
 
-        stage('validation')
+        stage('validation') {
             steps {
                 sh '''
                     ansible-playbook -i playbooks/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --syntax-check 
                     ansible-playbook -i playbooks/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --vv
                 '''
             }
+        }
     }
 }
