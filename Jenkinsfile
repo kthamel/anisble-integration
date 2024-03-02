@@ -26,7 +26,7 @@ pipeline {
             steps {
                 sh '''
                     hostnamectl
-                    ping -c 10 m2-jenair.39.local
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
                 '''
             }
         }
