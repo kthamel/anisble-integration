@@ -1,5 +1,8 @@
 pipeline {
     agent {label 'ansible'}
+    options {
+        ansiColor('xterm')
+    }
     environment {
         ANSIBLE_KEY=credentials('ANSIBLE_KEY')
     }
@@ -26,7 +29,7 @@ pipeline {
             steps {
                 sh '''
                     hostnamectl
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml -vv
                 '''
             }
         }
