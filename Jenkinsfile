@@ -10,14 +10,23 @@ pipeline {
                     ansible --version
                     ansible-playbook --version
                     ansible-galaxy --version
+                    ansible-lint --version
                 '''
             }
         }
 
-        stage('Validation') {
+        stage('Syntax_validation') {
             steps {
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --syntax-check 
+                '''
+            }
+        }
+
+        stage('Lint_validation') {
+            steps {
+                sh '''
+                    ansible-lint playbooks/test-playbook.yaml
                 '''
             }
         }
