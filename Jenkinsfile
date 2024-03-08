@@ -35,7 +35,7 @@ pipeline {
             steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml -vv
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml -v
                 '''
             }
         }
