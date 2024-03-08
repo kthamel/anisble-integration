@@ -3,7 +3,7 @@
   hosts: develop
   tasks:
     - name: Check DNF Version
-      ansible.builtin.command: dnf --version
+      ansible.builtin.command: sudo dnf --version
       become: true
       become_user: jenkins
       register: sshd_status
@@ -11,7 +11,7 @@
       ignore_errors: true
 
     - name: Get Repository Information
-      ansible.builtin.command: dnf repoinfo
+      ansible.builtin.command: sudo dnf repoinfo
       become: true
       become_user: jenkins
       register: sshd_status
@@ -19,7 +19,7 @@
       ignore_errors: true
 
     - name: Clean the Caches
-      ansible.builtin.command: dnf clean all
+      ansible.builtin.command: sudo dnf clean all
       become: true
       become_user: jenkins
       register: sshd_status
@@ -27,7 +27,7 @@
       ignore_errors: true
     
     - name: Check Kernel Version
-      ansible.builtin.command: uname -r
+      ansible.builtin.command: sudo uname -r
       become: true
       become_user: jenkins
       register: sshd_status
@@ -35,7 +35,7 @@
       ignore_errors: true
 
     - name: Update Operating System
-      ansible.builtin.command: dnf update -y
+      ansible.builtin.command: sudo dnf update -y
       become: true
       become_user: jenkins
       register: sshd_status
