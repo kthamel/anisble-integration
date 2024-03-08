@@ -2,8 +2,40 @@
 - name: Testing configurations
   hosts: develop
   tasks:
-    - name: Check playbook syntaxes
-      ansible.builtin.command: systemctl status sshd.service
+    - name: Check DNF Version
+      ansible.builtin.command: dnf --version
+      become: true
+      become_user: jenkins
+      register: sshd_status
+      changed_when: sshd_status != 0
+      ignore_errors: true
+
+    - name: Get Repository Information
+      ansible.builtin.command: dnf repoinfo
+      become: true
+      become_user: jenkins
+      register: sshd_status
+      changed_when: sshd_status != 0
+      ignore_errors: true
+
+    - name: Clean the Caches
+      ansible.builtin.command: dnf clean all
+      become: true
+      become_user: jenkins
+      register: sshd_status
+      changed_when: sshd_status != 0
+      ignore_errors: true
+    
+    - name: Check Kernel Version
+      ansible.builtin.command: uname -r
+      become: true
+      become_user: jenkins
+      register: sshd_status
+      changed_when: sshd_status != 0
+      ignore_errors: true
+
+    - name: Update Operating System
+      ansible.builtin.command: dnf update -y
       become: true
       become_user: jenkins
       register: sshd_status
