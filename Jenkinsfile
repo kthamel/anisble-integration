@@ -18,15 +18,7 @@ pipeline {
         stage('Syntax_validation') {
             steps {
                 sh '''
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml --syntax-check 
-                '''
-            }
-        }
-
-        stage('Lint_validation') {
-            steps {
-                sh '''
-                    echo "Lint Pass"
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
                 '''
             }
         }
@@ -35,7 +27,7 @@ pipeline {
             steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/test-playbook.yaml -v
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml -v
                 '''
             }
         }
