@@ -23,14 +23,16 @@ pipeline {
         }
 
         stage('Syntax_Validation') {
+            environment {
+                ANSIBLE_KEY=credentials('ANSIBLE_KEY')
             steps {
+                
                 sh '''
-                    chmod 0400 ANSIBLE_KEY
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
                 '''
             }
         }
-
+        }
         stage('Playbook_Execution') {
             steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
