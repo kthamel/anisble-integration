@@ -17,6 +17,7 @@ pipeline {
                 withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'PRIVATE_KEY')]) {
                     sh  '''
                         echo $PRIVATE_KEY > ANSIBLE_KEY
+                        chmod 0400 ANSIBLE_KEY
                     '''
                 }
                 sh 'cat ANSIBLE_KEY' 
