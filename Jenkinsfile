@@ -25,6 +25,7 @@ pipeline {
         stage('Syntax_Validation') {
             steps {
                 sh '''
+                    chmod 0400 ANSIBLE_KEY
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
                 '''
             }
