@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-    stage('Invoke_Ansible_Credentials') {
+        stage('Invoke_Ansible_Credentials') {
             steps {
                 withCredentials([vaultString(credentialsId: 'ansible_key', variable: '')]) {
                     sh 'echo Stage Passed'
