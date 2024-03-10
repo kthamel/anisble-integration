@@ -16,7 +16,7 @@ pipeline {
             steps {
                 withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'ANSIBLE_KEY')]) {
                     sh  '''
-                        echo $ANSIBLE_KEY
+                        echo $ANSIBLE_KEY > ANSIBLE_KEY.PEM
                     '''
                 } 
             }
