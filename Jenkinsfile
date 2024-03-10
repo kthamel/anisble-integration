@@ -16,7 +16,7 @@ pipeline {
             steps {
                 withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'PRIVATE_KEY')]) {
                     sh  '''
-                        echo $PRIVATE_KEY > ANSIBLE_KEY
+                        echo $PRIVATE_KEY
                     '''
                 } 
             }
@@ -25,7 +25,7 @@ pipeline {
         stage('Syntax_Validation') {
             steps {
                 sh '''
-                    ansible-playbook -i inventory/hosts --private-key=ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
                 '''
             }
         }
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''
-                    ansible-playbook -i inventory/hosts --private-key=ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml -v
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml -v
                 '''
             }
         }
