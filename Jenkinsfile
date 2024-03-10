@@ -1,8 +1,5 @@
 pipeline {
     agent {label 'ansible'}
-    environment {
-        ANSIBLE_KEY=credentials('ANSIBLE_KEY')
-    }
     stages {
         stage('Check_Versions'){
             steps {
