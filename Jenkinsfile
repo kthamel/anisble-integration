@@ -16,9 +16,10 @@ pipeline {
             steps {
                 withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'PRIVATE_KEY')]) {
                     sh  '''
-                        echo $ANSIBLE_KEY > ANSIBLE_KEY
+                        echo $ANSIBLE_KEY > tmp
                     '''
-                } 
+                }
+                sh 'cat tmp' 
             }
         }
 
