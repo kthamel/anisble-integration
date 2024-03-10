@@ -15,12 +15,11 @@ pipeline {
         stage('Invoke_Ansible_Credentials') {
             steps {
                 withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'PRIVATE_KEY')]) {
-                    sh  '''
-                        echo $PRIVATE_KEY > ANSIBLE_KEY
-                        chmod 0400 ANSIBLE_KEY
-                    '''
-                }
-                sh 'cat ANSIBLE_KEY' 
+                    sh  'echo -----BEGIN OPENSSH PRIVATE KEY----- > ANSIBLE_KEY'
+                    sh  'echo $PRIVATE_KEY >> ANSIBLE_KEY'
+                    sh  'echo -----END OPENSSH PRIVATE KEY---- >> ANSIBLE_KEY'
+                    sh  'chmod 0400 ANSIBLE_KEY'
+                } 
             }
         }
 
