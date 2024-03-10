@@ -4,7 +4,7 @@ pipeline {
         ANSIBLE_KEY=credentials('ANSIBLE_KEY')
     }
     stages {
-        stage('Versions'){
+        stage('Check_Versions'){
             steps {
                 sh '''
                     ansible --version
@@ -14,8 +14,16 @@ pipeline {
                 '''
             }
         }
+        
+    stage('Invoke_Ansible_Credentials') {
+            steps {
+                withCredentials([vaultString(credentialsId: 'ansible_key', variable: '')]) {
+                    sh 'echo Stage Passed'
+                } 
+            }
+        }
 
-        stage('Syntax_validation') {
+        stage('Syntax_Validation') {
             steps {
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
@@ -23,7 +31,7 @@ pipeline {
             }
         }
 
-        stage('Execution') {
+        stage('Playbook_Execution') {
             steps {
                 input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''

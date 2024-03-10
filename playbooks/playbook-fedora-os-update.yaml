@@ -2,38 +2,6 @@
 - name: Testing configurations
   hosts: develop
   tasks:
-    - name: Check DNF Version
-      ansible.builtin.command: sudo dnf --version
-      become: true
-      become_user: jenkins
-      register: sshd_status
-      changed_when: sshd_status != 0
-      ignore_errors: true
-
-    - name: Get Repository Information
-      ansible.builtin.command: sudo dnf repoinfo
-      become: true
-      become_user: jenkins
-      register: sshd_status
-      changed_when: sshd_status != 0
-      ignore_errors: true
-
-    - name: Clean the Caches
-      ansible.builtin.command: sudo dnf clean all
-      become: true
-      become_user: jenkins
-      register: sshd_status
-      changed_when: sshd_status != 0
-      ignore_errors: true
-    
-    - name: Check Kernel Version
-      ansible.builtin.command: sudo uname -r
-      become: true
-      become_user: jenkins
-      register: sshd_status
-      changed_when: sshd_status != 0
-      ignore_errors: true
-
     - name: Update Operating System
       ansible.builtin.command: sudo dnf update -y
       become: true
