@@ -17,8 +17,10 @@ pipeline {
         
         stage('Invoke_Ansible_Credentials') {
             steps {
-                withCredentials([vaultString(credentialsId: 'ansible_key', variable: '')]) {
-                    sh 'echo Stage Passed'
+                withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'PRIVATE_KEY')]) {
+                    sh  '''
+                        echo Private Key Fetched
+                    '''
                 } 
             }
         }
