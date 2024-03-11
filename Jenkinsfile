@@ -16,10 +16,9 @@ pipeline {
             steps {
                 withCredentials([vaultFile(credentialsId: 'ANSIBLE_SSH_KEY', variable: 'ANSIBLE_SSH_KEY')]) {
                     sh  '''
-                        echo $ANSIBLE_SSH_KEY > ANSIBLE_SSH_KEY
+                        echo Invoked
                     '''
-                }
-                'sh cat ANSIBLE_SSH_KEY' 
+                } 
             }
         }
 
