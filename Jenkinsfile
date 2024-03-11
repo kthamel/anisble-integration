@@ -16,7 +16,7 @@ pipeline {
             steps {
                 withCredentials([vaultFile(credentialsId: 'ANSIBLE_SSH_KEY', variable: 'ANSIBLE_SSH_KEY')]) {
                     sh  '''
-                        echo Key is There!!
+                        echo $ANSIBLE_SSH_KEY
                     '''
                 } 
             }
