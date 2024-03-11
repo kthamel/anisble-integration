@@ -16,7 +16,7 @@ pipeline {
             steps {
                 withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'ANSIBLE_KEY')]) {
                     sh  '''
-                        echo $ANSIBLE_KEY | fold -w 64 > ANSIBLE_KEY.PEM
+                        echo Key is There!!
                     '''
                 } 
             }
@@ -32,10 +32,12 @@ pipeline {
 
         stage('Playbook_Execution') {
             steps {
-                input id: 'InputMsg', message: 'Are you sure to do that?'
-                sh '''
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY.PEM playbooks/playbook-fedora-os-update.yaml -v
-                '''
+                withCredentials([vaultString(credentialsId: 'ansible_key', variable: 'ANSIBLE_KEY')]) {
+                    input id: 'InputMsg', message: 'Are you sure to do that?'
+                    sh '''
+                        ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_KEY.PEM playbooks/playbook-fedora-os-update.yaml -v
+                    '''
+                }
             }
         }
     }
