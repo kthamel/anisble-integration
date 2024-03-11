@@ -14,7 +14,7 @@ pipeline {
         
         stage('Invoke_Ansible_Credentials') {
             steps {
-                withCredentials([vaultString(credentialsId: 'ANSIBLE_SSH_KEY', variable: 'ANSIBLE_SSH_KEY')]) {
+                withCredentials([vaultFile(credentialsId: 'ANSIBLE_SSH_KEY', variable: 'ANSIBLE_SSH_KEY')]) {
                     sh  '''
                         echo Key is There!!
                     '''
@@ -32,7 +32,7 @@ pipeline {
 
         stage('Playbook_Execution') {
             steps {
-                withCredentials([vaultString(credentialsId: 'ANSIBLE_SSH_KEY', variable: 'ANSIBLE_SSH_KEY')]) {
+                withCredentials([vaultFile(credentialsId: 'ANSIBLE_SSH_KEY', variable: 'ANSIBLE_SSH_KEY')]) {
                     input id: 'InputMsg', message: 'Are you sure to do that?'
                     sh '''
                         ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml -v
