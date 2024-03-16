@@ -13,4 +13,3 @@
     - name: Print Log
       ansible.builtin.debug:
         var: sshd_status
-        verbosity: 2
