@@ -9,3 +9,8 @@
       register: sshd_status
       changed_when: sshd_status != 0
       ignore_errors: true
+
+    - name: Print Log
+      ansible.builtin.debug:
+        var: sshd_status
+        verbosity: 2
