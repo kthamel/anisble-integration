@@ -15,6 +15,14 @@ pipeline {
             }
         }
         
+        stage('Connectivity_Test') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m ping
+                '''
+            }
+        }
+
         stage('Syntax_Validation') {
             steps {
                 sh '''
