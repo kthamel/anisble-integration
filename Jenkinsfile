@@ -35,7 +35,7 @@ pipeline {
         stage('Pipeline_log') {
             steps {
                 sh '''
-                    cat /tmp/ansible/ansible.log
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
                 '''
             }
         }
