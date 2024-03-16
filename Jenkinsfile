@@ -31,5 +31,14 @@ pipeline {
                 '''
             }
         }
+
+        stage('Pipeline_log') {
+            steps {
+                sh '''
+                    cat /tmp/ansible/ansible.log
+                '''
+            }
+        }
+
     }
 }
