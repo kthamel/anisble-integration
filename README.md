@@ -52,3 +52,5 @@ ansible all -i inventory/hosts --private-key=**** -m gather_facts --limit m2-jen
         state: present
       when: ansible_distribution == "Fedora"
 
+# List the tags inside the playbook
+ansible-playbook --list-tags playbook_05.yaml
