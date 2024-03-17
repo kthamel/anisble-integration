@@ -1,27 +1,27 @@
 ---
 - name: Playbook_01
   hosts: develop
-  become: true
-  become_user: jenkins
+  # become: true
+  # become_user: jenkins
   tasks:
     - name: Install httpd
       ansible.builtin.dnf:
         name: httpd
         state: present
-        # become: true
-        # become_user: jenkins
+        become: true
+        become_user: jenkins
 
     - name: Start httpd
       ansible.builtin.service:
         name: httpd
         state: started
         enabled: true
-        # become: true
-        # become_user: jenkins
+        become: true
+        become_user: jenkins
 
     - name: Uninstall httpd
       ansible.builtin.dnf:
         name: httpd
         state: absent
-        # become: true
-        # become_user: jenkins
+        become: true
+        become_user: jenkins
