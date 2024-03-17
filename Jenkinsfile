@@ -42,7 +42,7 @@ pipeline {
         stage('Ad_Hoc_Command_2') {
             steps {
                 sh '''
-                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=jenkins --become-method=sudo --become        
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=root --become-method=sudo --become        
                 '''
             }
         }
