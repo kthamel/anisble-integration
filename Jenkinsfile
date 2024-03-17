@@ -34,7 +34,7 @@ pipeline {
         stage('Ad_Hoc_Command') {
             steps {
                 sh '''
-                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a updateinfo=true
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
                 '''
             }
         }

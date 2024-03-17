@@ -15,4 +15,4 @@ ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts   
 [Gather fatcs of target hosts]
 
 # Execute the add-hoc commands | With changes
-ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf updateinfo=true 
+ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf update_cache=true 
