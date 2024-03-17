@@ -18,4 +18,4 @@ ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts   
 ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true   // -a : argivement
 [Passing the update_cache argivement witht the dnf module]
 
-ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present"
+ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=jenkins --become-method=sudo
