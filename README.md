@@ -25,3 +25,6 @@ ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=ht
 ansible-lint playbook.yaml      //  For specific playbook
 ansible-lint                    //  For all playbooks inside the specific directory
 
+# Limit the playbook for specific targer
+ansible all -i inventory/hosts --private-key=**** -m gather_facts --limit m2-jenair.39.local    // --limit: playbook will be executed only to the  "m2-jenair.39.local" host.
+
