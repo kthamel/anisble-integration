@@ -6,10 +6,10 @@
       ansible.builtin.dnf:
         name: httpd
         state: present
-      when: ansible_distribution == "Fedora"
+      when: ansible_distribution == "Fedora"  # This task will be execute, if condition is fulfill
 
     - name: Task 02
       ansible.builtin.dnf:
         name: httpd
         state: present
-      when: ansible_distribution == "Ubuntu"
+      when: ansible_distribution == "Ubuntu"  # This task will be execute, if condition is fulfill
