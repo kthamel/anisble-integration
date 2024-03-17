@@ -1,0 +1,8 @@
+---
+- name: Playbook_01
+  hosts: develop
+  tasks:
+    - name: Install httpd
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
