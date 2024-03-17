@@ -43,7 +43,7 @@ pipeline {
         stage('Ad_Hoc_Command_2') {
             steps {
                 sh '''
-                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a name=httpd --become
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present"
                 '''
             }
         }
