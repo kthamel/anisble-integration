@@ -24,3 +24,5 @@
         content: "Welcome to Ansible"
         dest: /var/www/html/index.html
         mode: '0644'
+        owner: root
+        group: root
