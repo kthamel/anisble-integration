@@ -31,7 +31,7 @@ pipeline {
             }
         }
 
-        stage('Gathering_Facts') {
+        stage('Gathering_Facts_Specific') {
             steps {
                 sh '''
                     ansible -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts
