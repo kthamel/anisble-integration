@@ -31,6 +31,14 @@ pipeline {
             }
         }
 
+        stage('Ad_Hoc_Command') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf updateinfo=true
+                '''
+            }
+        }
+
         stage('Syntax_Validation') {
             steps {
                 sh '''
