@@ -35,7 +35,6 @@ pipeline {
             steps {
                 sh '''
                     ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
-                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a name=httpd --become
                 '''
             }
         }
