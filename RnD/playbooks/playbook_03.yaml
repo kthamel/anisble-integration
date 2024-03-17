@@ -1,0 +1,11 @@
+---
+- name: Playbook_02
+  hosts: develop
+  tasks:
+    - name: Task 01
+      ansible.builtin.dnf:
+        name:
+          - httpd
+          - firewalld
+        state: present
+      when: ansible_distribution == "Fedora"
