@@ -21,3 +21,7 @@ ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_c
 ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=root --become
 [When installing the packages, have to pass the argument inside the "brackets" and --become-user should be root.]
 
+# Check the playbook is good for production
+ansible-lint playbook.yaml      //  For specific playbook
+ansible-lint                    //  For all playbooks inside the specific directory
+

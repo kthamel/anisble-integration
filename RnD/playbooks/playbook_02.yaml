@@ -1,0 +1,15 @@
+---
+- name: Playbook_02
+  hosts: develop
+  tasks:
+    - name: Task 01
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+      when: ansible_distribution == "Fedora"
+
+    - name: Task 02
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+      when: ansible_distribution == "Ubuntu"
