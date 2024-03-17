@@ -31,6 +31,16 @@ pipeline {
             }
         }
 
+        stage('Executing Ad-Hoc Commands') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts --limit m2-jenair.39.local
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=root --become        
+                    '''
+            }
+        }
         stage('Executing Playbooks') {
             steps {
                 sh '''
