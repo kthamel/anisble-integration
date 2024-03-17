@@ -1,0 +1,22 @@
+---
+- name: Uninstall packages
+  hosts: develop
+  pre_tasks:
+    - name: Task 01
+      ansible.builtin.dnf:
+        name:
+          - httpd
+          - vim
+        state: absent
+      when: ansible_distribution == "Fedora"
+
+- name: Install packages
+  hosts: develop
+  tasks:
+    - name: Task 01
+      ansible.builtin.dnf:
+        name:
+          - httpd
+          - vim
+        state: present
+      when: ansible_distribution == "Fedora"
