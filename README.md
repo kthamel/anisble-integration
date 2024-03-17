@@ -26,5 +26,34 @@ ansible-lint playbook.yaml      //  For specific playbook
 ansible-lint                    //  For all playbooks inside the specific directory
 
 # Limit the playbook for specific targer
-ansible all -i inventory/hosts --private-key=**** -m gather_facts --limit m2-jenair.39.local    // --limit: playbook will be executed only to the  "m2-jenair.39.local" host.
+ansible all -i inventory/hosts --private-key=**** -m gather_facts --limit m2-jenair.39.local    // --limit: playbook will be [Executed only to the  "m2-jenair.39.local" host.]
+
+# Pre_tasks always execute before executing the tasks inside the playbook.
+---
+- name: Uninstall packages
+  hosts: develop
+  pre_tasks:
+    - name: Task 01
+      ansible.builtin.dnf:
+        name:
+          - httpd
+          - vim
+        state: absent
+      when: ansible_distribution == "Fedora"
+
+- name: Install packages
+  hosts: develop
+  tasks:
+    - name: Task 01
+      ansible.builtin.dnf:
+        name:
+          - httpd
+          - vim
+        state: present
+      when: ansible_distribution == "Fedora"
+
+# List the tags inside the playbook
+ansible-playbook --list-tags playbook_05.yaml
+ansible-playbook -i inventory/hosts --private-key=**** RnD/playbooks/playbook_05.yaml --tags red --become-user=root --become -v
+[Executed only to the task's had "red" tag]
 

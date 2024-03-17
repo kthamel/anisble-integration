@@ -23,74 +23,20 @@ pipeline {
             }
         }
 
-        stage('Gathering_Facts') {
+        stage('Executing_Playbooks') {
             steps {
                 sh '''
                     ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts
-                '''
-            }
-        }
-
-        stage('Gathering_Facts_Limit') {
-            steps {
-                sh '''
                     ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts --limit m2-jenair.39.local
-                '''
-            }
-        }
-
-        stage('Ad_Hoc_Command_1') {
-            steps {
-                sh '''
                     ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
-                '''
-            }
-        }
-
-        stage('Ad_Hoc_Command_2') {
-            steps {
-                sh '''
                     ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=root --become        
-                '''
-            }
-        }
-
-        stage('Syntax_Validation') {
-            steps {
-                sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
-                '''
-            }
-        }
-
-        stage('Playbook_Execution') {
-            steps {
-                sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml -v
-                '''
-            }
-        }
-
-        stage('Playbook_01_Execution') {
-            steps {
-                sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_01.yaml --become-user=root --become -v
-                '''
-            }
-        }
-
-        stage('Playbook_02_Execution') {
-            steps {
-                sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_02.yaml --become-user=root --become -v
-                '''
-            }
-        }
-
-        stage('Playbook_03_Execution') {
-            steps {
-                sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_03.yaml --become-user=root --become -v
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_04.yaml --become-user=root --become -v
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_05.yaml --tags red--become-user=root --become -v
                 '''
             }
         }
