@@ -31,11 +31,19 @@ pipeline {
             }
         }
 
-        stage('Ad_Hoc_Command') {
+        stage('Ad_Hoc_Command_1') {
             steps {
                 sh '''
                     ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
-                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a name=httpd 
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a name=httpd --become
+                '''
+            }
+        }
+
+        stage('Ad_Hoc_Command_2') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a name=httpd --become
                 '''
             }
         }
