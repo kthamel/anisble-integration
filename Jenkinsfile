@@ -57,7 +57,6 @@ pipeline {
 
         stage('Playbook_Execution') {
             steps {
-                input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml -v
                 '''
@@ -66,7 +65,6 @@ pipeline {
 
         stage('Playbook_01_Execution') {
             steps {
-                input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_01.yaml --become-user=root --become -v
                 '''
