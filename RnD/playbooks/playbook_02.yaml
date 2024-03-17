@@ -23,5 +23,5 @@
     - name: Task 04
       ansible.builtin.dnf:
         name: httpd
-        state: present
+        state: absent
       when: ansible_distribution == "Fedora" and ansible_distribution_file_variety == "RedHat" ## This task will be execute, if it fulfill the both conditions.
