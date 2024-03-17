@@ -14,7 +14,39 @@ pipeline {
                 '''
             }
         }
-        
+
+        stage('Connectivity_Test') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m ping
+                '''
+            }
+        }
+
+        stage('Gathering_Facts') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts
+                '''
+            }
+        }
+
+        stage('Ad_Hoc_Command_1') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
+                '''
+            }
+        }
+
+        stage('Ad_Hoc_Command_2') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=root --become        
+                '''
+            }
+        }
+
         stage('Syntax_Validation') {
             steps {
                 sh '''
