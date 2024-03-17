@@ -26,15 +26,15 @@ pipeline {
         stage('Gathering_Facts') {
             steps {
                 sh '''
-                    ansible develop -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts
                 '''
             }
         }
 
-        stage('Gathering_Facts_Specific') {
+        stage('Gathering_Facts_Limit') {
             steps {
                 sh '''
-                    ansible develop -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts --limit m2-jenair.39.local
                 '''
             }
         }
@@ -42,7 +42,7 @@ pipeline {
         stage('Ad_Hoc_Command_1') {
             steps {
                 sh '''
-                    ansible -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a update_cache=true
                 '''
             }
         }
@@ -50,7 +50,7 @@ pipeline {
         stage('Ad_Hoc_Command_2') {
             steps {
                 sh '''
-                    ansible -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=root --become        
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m dnf -a "name=httpd state=present" --become-user=root --become        
                 '''
             }
         }
