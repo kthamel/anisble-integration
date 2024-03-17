@@ -18,7 +18,7 @@ pipeline {
         stage('Connectivity_Test') {
             steps {
                 sh '''
-                    ansible -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m ping
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m ping
                 '''
             }
         }
