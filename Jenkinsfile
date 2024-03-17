@@ -70,5 +70,13 @@ pipeline {
                 '''
             }
         }
+
+        stage('Playbook_02_Execution') {
+            steps {
+                sh '''
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_02.yaml --become-user=root --become -v
+                '''
+            }
+        }
     }
 }
