@@ -13,3 +13,9 @@
         name: httpd
         state: present
       when: ansible_distribution == "Ubuntu"  # This task will be execute, if condition is fulfill
+    
+    - name: Task 03
+      ansible.builtin.dnf:
+        name: httpd
+        state: present
+      when: ansible_distribution in ["Debian", "Mint"]  # This task will be execute, if ansible_distribution is Debian or Mint
