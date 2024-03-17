@@ -56,4 +56,6 @@ ansible all -i inventory/hosts --private-key=**** -m gather_facts --limit m2-jen
 ansible-playbook --list-tags playbook_05.yaml
 ansible-playbook -i inventory/hosts --private-key=**** RnD/playbooks/playbook_05.yaml --tags red --become-user=root --become -v
 [Executed only to the task's had "red" tag]
+ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_05.yaml --tags "red,blue" --become-user=root --become -v
+[Executed only to the task's had "red" and "blue" tag]
 
