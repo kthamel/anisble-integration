@@ -26,7 +26,7 @@ pipeline {
         stage('Ansible Lint') {
             steps {
                 sh '''
-                    ansible-lint ansible-lint RnD/playbooks/
+                    ansible-lint RnD/playbooks/
                 '''
             }
         }
