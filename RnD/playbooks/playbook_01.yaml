@@ -6,3 +6,14 @@
       ansible.builtin.dnf:
         name: httpd
         state: present
+
+    - name: Start httpd
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Uninstall httpd
+      ansible.builtin.dnf:
+        name: httpd
+        state: absent

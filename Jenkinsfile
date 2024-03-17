@@ -31,6 +31,14 @@ pipeline {
             }
         }
 
+        stage('Gathering_Facts_Limit') {
+            steps {
+                sh '''
+                    ansible all -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY -m gather_facts --limit m2-jenair.39.local
+                '''
+            }
+        }
+
         stage('Ad_Hoc_Command_1') {
             steps {
                 sh '''
@@ -57,7 +65,6 @@ pipeline {
 
         stage('Playbook_Execution') {
             steps {
-                input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml -v
                 '''
@@ -66,9 +73,24 @@ pipeline {
 
         stage('Playbook_01_Execution') {
             steps {
-                input id: 'InputMsg', message: 'Are you sure to do that?'
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_01.yaml --become-user=root --become -v
+                '''
+            }
+        }
+
+        stage('Playbook_02_Execution') {
+            steps {
+                sh '''
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_02.yaml --become-user=root --become -v
+                '''
+            }
+        }
+
+        stage('Playbook_03_Execution') {
+            steps {
+                sh '''
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_03.yaml --become-user=root --become -v
                 '''
             }
         }
