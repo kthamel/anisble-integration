@@ -19,10 +19,17 @@
         state: started
         enabled: true
 
-    - name: Start httpd service
+    - name: Add index.html file
       ansible.builtin.copy:
         content: "Welcome to Ansible"
         dest: /var/www/html/index.html
         mode: '0644'
         owner: root
         group: root
+
+    - name: Allow from firewall
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: true
+        immediate: true
+        state: enabled

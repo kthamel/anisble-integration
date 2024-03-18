@@ -1,0 +1,20 @@
+- name: User account creation
+  hosts: develop
+  tasks:
+    - name: Delete the user
+      ansible.builtin.user:
+        name: adam
+        state: absent
+        remove: true
+
+    - name: Create new user
+      ansible.builtin.user:
+        name: adam
+        state: present
+        shell: /bin/bash
+        groups: wheel
+        uid: 1010
+        generate_ssh_key: true
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
+        append: true
