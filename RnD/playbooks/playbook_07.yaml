@@ -1,0 +1,34 @@
+- name: Setup web server
+  hosts: develop
+  tasks:
+    - name: Uninstall httpd if exists
+      ansible.builtin.dnf:
+        name:
+          - httpd
+        state: absent
+
+    - name: Install httpd if exists
+      ansible.builtin.dnf:
+        name:
+          - httpd
+        state: present
+
+    - name: Start httpd service
+      ansible.builtin.service:
+        name: httpd
+        state: started
+        enabled: true
+
+    - name: Add index.html file
+      ansible.builtin.copy:
+        content: "Welcome to Ansible"
+        dest: /var/www/html/index.html
+        mode: '0644'
+        owner: root
+        group: root
+
+    - name: Allow from firewall
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: true
+        state: enabled
