@@ -1,6 +1,12 @@
 - name: User account creation
   hosts: develop
   tasks:
+    - name: Delete the user
+      ansible.builtin.user:
+        name: adam
+        state: absent
+        remove: true
+
     - name: Create new user
       ansible.builtin.user:
         name: adam
