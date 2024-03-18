@@ -54,6 +54,7 @@ pipeline {
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_05.yaml --tags "red,blue" --become-user=root --become -v
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_06.yaml --become-user=root --become -v
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_07.yaml --become-user=root --become -v
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_08.yaml --become-user=root --become -v
                 '''
             }
         }
