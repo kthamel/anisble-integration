@@ -6,14 +6,15 @@
     ansible.builtin.file:
       path: /var/www/html/index.html
       state: absent
-      ignore_errors: true
 
-- hosts: develops
+- name: For develop env
+  hosts: develops
   become: true
   roles:
     - develop
 
-- hosts: production
+- name: For production env
+  hosts: production
   become: true
   roles:
     - production
