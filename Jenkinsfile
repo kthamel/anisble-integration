@@ -62,7 +62,7 @@ pipeline {
         stage('Ansible Lint - Roles') {
             steps {
                 sh '''
-                    ansible-lint RnD/roles/
+                    ansible-lint RnD/ansible_roles
                 '''
             }
         }
