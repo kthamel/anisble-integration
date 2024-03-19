@@ -1,7 +1,7 @@
 - name: Install httpd if exists
   ansible.builtin.dnf:
     name:
-    - httpd
+      - httpd
     state: present
 
 - name: Start httpd service
