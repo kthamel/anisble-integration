@@ -9,7 +9,7 @@
         state: absent
 
 - name: For develop env
-  hosts: develops
+  hosts: develop
   become: true
   roles:
     - develop
