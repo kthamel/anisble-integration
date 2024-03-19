@@ -1,8 +1,3 @@
-- hosts: all
-  become: true
-  roles:
-    - base
-
 - hosts: develop
   become: true
   roles:

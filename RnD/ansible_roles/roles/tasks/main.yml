@@ -1,0 +1,7 @@
+- name: Add index.html file
+  ansible.builtin.copy:
+    content: "Ansible - Execution"
+    dest: /tmp/ansible.txt
+    mode: '0644'
+    owner: root
+    group: root
