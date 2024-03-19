@@ -1,8 +1,9 @@
-- hosts: develop
+- name: Cleanup task
+  hosts: all
   become: true
   pre_tasks:
 
-    - name: Clean develop env
+    - name: Remove index.html file
       ansible.builtin.file:
         path: /var/www/html/index.html
         state: absent
