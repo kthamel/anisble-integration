@@ -1,12 +1,12 @@
-# - name: Cleanup task
-#   hosts: all
-#   become: true
-#   pre_tasks:
+- name: Cleanup task
+  hosts: all
+  become: true
+  pre_tasks:
 
-#     - name: Remove index.html file
-#       ansible.builtin.file:
-#         path: /var/www/html/index.html
-#         state: absent
+    - name: Remove index.html file
+      ansible.builtin.file:
+        path: /var/www/html/index.html
+        state: absent
 
 - name: For develop env
   hosts: develop
