@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('Ansible Lint') {
+        stage('Ansible Lint - Playbooks') {
             steps {
                 sh '''
                     ansible-lint RnD/playbooks/
@@ -44,7 +44,6 @@ pipeline {
         stage('Executing Playbooks') {
             steps {
                 sh '''
-                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml --syntax-check 
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY playbooks/playbook-fedora-os-update.yaml -v
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_01.yaml --become-user=root --become -v
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_02.yaml --become-user=root --become -v
@@ -55,6 +54,22 @@ pipeline {
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_06.yaml --become-user=root --become -v
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_07.yaml --become-user=root --become -v
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_08.yaml --become-user=root --become -v
+                '''
+            }
+        }
+
+        stage('Ansible Lint - Roles') {
+            steps {
+                sh '''
+                    ansible-lint RnD/ansible_roles
+                '''
+            }
+        }
+
+        stage('Executing Roles') {
+            steps {
+                sh '''
+                    ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/ansible_roles/playbook.yaml --become-user=root --become -v
                 '''
             }
         }

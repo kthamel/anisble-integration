@@ -1,0 +1,8 @@
+galaxy_info:
+  author: Kushan Thamel
+  description: Ansible Jenkins Integration
+  company: AJI Co
+  license: license (GPL-3.0-only, MIT)
+  min_ansible_version: "2.1"
+  galaxy_tags: []
+dependencies: []
