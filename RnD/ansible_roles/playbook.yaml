@@ -5,7 +5,7 @@
 
     - name: Remove index.html file
       ansible.builtin.file:
-        path: /tmp/ansible.txt
+        path: /var/www/html/index.html
         state: absent
 
 - name: For develop env
