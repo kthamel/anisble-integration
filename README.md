@@ -59,3 +59,7 @@ ansible-playbook -i inventory/hosts --private-key=**** RnD/playbooks/playbook_05
 ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/playbooks/playbook_05.yaml --tags "red,blue" --become-user=root --become -v
 [Executed only to the task's had "red" and "blue" tag]
 
+# Create roles using Ansible Galaxy
+ansible-galaxy role init roles
+[It will create the skelton of an Ansible role]
+
