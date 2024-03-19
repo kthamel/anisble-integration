@@ -7,7 +7,7 @@
       path: /var/www/html/index.html
       state: absent
       ignore_errors: true
-  
+
 - hosts: develops
   become: true
   roles:
