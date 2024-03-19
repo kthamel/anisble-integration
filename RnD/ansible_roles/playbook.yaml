@@ -1,5 +1,15 @@
 - hosts: develop
   become: true
+  pre_tasks:
+
+  - name: Clean develop env
+    ansible.builtin.file:
+      path: /var/www/html/index.html
+      state: absent
+      ignore_errors: true
+  
+- hosts: develops
+  become: true
   roles:
     - develop
 
