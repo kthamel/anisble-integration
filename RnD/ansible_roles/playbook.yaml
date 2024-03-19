@@ -2,10 +2,10 @@
   become: true
   pre_tasks:
 
-  - name: Clean develop env
-    ansible.builtin.file:
-      path: /var/www/html/index.html
-      state: absent
+    - name: Clean develop env
+      ansible.builtin.file:
+        path: /var/www/html/index.html
+        state: absent
 
 - name: For develop env
   hosts: develops
