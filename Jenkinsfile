@@ -66,7 +66,7 @@ pipeline {
             }
         }
 
-        stage('Executing Playbooks') {
+        stage('Executing Roles') {
             steps {
                 sh '''
                     ansible-playbook -i inventory/hosts --private-key=$ANSIBLE_SSH_KEY RnD/ansible_roles/playbook.yaml -v
