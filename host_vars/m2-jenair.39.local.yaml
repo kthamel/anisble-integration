@@ -1,0 +1,2 @@
+package_httpd: httpd-2.4.58-1.fc39.aarch64
+package_php: 8.2.16-1.fc39

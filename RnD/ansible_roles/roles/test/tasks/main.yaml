@@ -1,0 +1,5 @@
+- name: Install httpd if not exists
+  ansible.builtin.dnf:
+    name:
+      - "{{ package_httpd }}"
+    state: present
